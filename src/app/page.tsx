@@ -70,8 +70,7 @@ export default function Home() {
 
         <main className="flex-1">
           <section className="relative w-full pt-24 pb-20 md:pt-36 md:pb-28 flex items-center justify-center text-center overflow-hidden">
-            <div className="absolute inset-0 -z-10 h-full w-full bg-background">
-              <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:30px_30px] opacity-50 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 animate-[animated-gradient_10s_ease_infinite]">
             </div>
             
             <div className="container px-4 md:px-6 z-10">
