@@ -1,6 +1,6 @@
 export function Logo() {
   return (
-    <div className="flex items-center gap-2" title="AirdropSim by ZKSync">
+    <div className="flex items-center gap-2" title="ZKSYNC Airdrop Simulation">
       <svg
         className="h-8 w-8 text-primary"
         viewBox="0 0 24 24"
@@ -36,7 +36,7 @@ export function Logo() {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="text-xl font-bold font-headline">AirdropSim</span>
+      <span className="text-xl font-bold font-headline">ZKSYNC</span>
     </div>
   );
 }

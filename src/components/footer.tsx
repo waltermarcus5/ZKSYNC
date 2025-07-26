@@ -45,7 +45,7 @@ export function SiteFooter() {
             secret phrase.
           </p>
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} AirdropSim. All rights reserved.
+            © {new Date().getFullYear()} ZKSYNC. All rights reserved.
           </p>
         </div>
       </div>
