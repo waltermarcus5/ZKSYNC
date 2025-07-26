@@ -107,7 +107,8 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="how-it-works" className="py-20 sm:py-28">
+          <section id="how-it-works" className="py-20 sm:py-28 relative">
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(12,74,53,0.15),transparent)]"></div>
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
