@@ -90,7 +90,11 @@ export default function Home() {
                   <span className="font-bold text-foreground">4,000 ZK</span> tokens.
                 </p>
                 <CountdownTimer />
-                <div className="flex justify-center">
+                <div className="flex justify-center items-center gap-2 text-sm text-green-400 mt-4">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span>Secured by Blockchain &amp; AI Verification</span>
+                </div>
+                <div className="flex justify-center pt-4">
                   <Button
                     size="lg"
                     className="font-bold text-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
