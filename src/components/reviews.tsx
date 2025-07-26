@@ -11,7 +11,7 @@ const reviews = [
     text: "The process was so smooth! I connected my wallet and had my ZK tokens in minutes. Highly recommend this airdrop to everyone.",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "man smiling",
+    hint: "smiling man",
   },
   {
     name: "Samantha Lee",
@@ -29,7 +29,7 @@ const reviews = [
     text: "Finally, a straightforward airdrop. No hoops to jump through. Connected, claimed, done. The future of L2s is bright!",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "man in city",
+    hint: "man city",
   },
   {
     name: "Olivia Chen",
@@ -38,7 +38,7 @@ const reviews = [
     text: "As a long-time supporter of ZK-rollups, this airdrop was a fantastic reward. The team has built something truly special.",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "woman with glasses",
+    hint: "woman glasses",
   },
   {
     name: "Daniel Rodriguez",
@@ -47,7 +47,7 @@ const reviews = [
     text: "Impressed by the security and ease of use. This sets a new standard for how airdrops should be conducted. Two thumbs up!",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "man with beard",
+    hint: "man beard",
   },
   {
     name: "Aisha Khan",
@@ -56,7 +56,7 @@ const reviews = [
     text: "The educational aspect of this simulation is brilliant. It's a safe way for newcomers to learn about airdrops without risk.",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "woman at cafe",
+    hint: "woman cafe",
   },
   {
     name: "Mike Stan",
@@ -65,7 +65,7 @@ const reviews = [
     text: "This is the cleanest airdrop interface I've ever seen. The team has clearly put a lot of thought into the user experience.",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "man with headphones",
+    hint: "man headphones",
   },
   {
     name: "Chloe Kim",
@@ -74,7 +74,7 @@ const reviews = [
     text: "Super fast and easy. I'm excited to see how the ZKSync ecosystem develops from here. Great project!",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "woman in a gallery",
+    hint: "woman gallery",
   },
   {
     name: "James White",
@@ -83,7 +83,7 @@ const reviews = [
     text: "A fantastic example of how to do a community airdrop right. Well done to the entire team. Highly professional.",
     rating: 5,
     image: "https://placehold.co/100x100.png",
-    hint: "man by the sea",
+    hint: "man sea",
   },
 ];
 
