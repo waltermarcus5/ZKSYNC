@@ -142,7 +142,7 @@ export default function Home() {
                     2. Verify Eligibility
                   </h3>
                   <p className="text-muted-foreground text-lg">
-                    Import your wallet to automatically check if you are
+                    Connect your wallet to automatically check if you are
                     eligible for the airdrop.
                   </p>
                 </div>
@@ -155,7 +155,7 @@ export default function Home() {
                   <h3 className="font-bold text-2xl mb-3">3. Claim Tokens</h3>
                   <p className="text-muted-foreground text-lg">
                     Once verified, your ZK tokens are sent to your wallet
-                    address. (Simulated)
+                    address.
                   </p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export default function Home() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
-                      Our platform uses industry-standard security practices. This is an educational simulation; never share your real secret phrase.
+                      Our platform uses GDPR industry-standard security to ensure robust data protection. This create a secure environment where your information is safeguarded.
                     </p>
                   </CardContent>
                 </Card>
@@ -208,7 +208,7 @@ export default function Home() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
-                      By participating, you join a vibrant community of early adopters and developers shaping the future of ZK technology.
+                      By participating, you join a vibrant community of early adopters and developers shaping the future of ZK Cryto space.
                     </p>
                   </CardContent>
                 </Card>
@@ -252,7 +252,7 @@ export default function Home() {
                   </CardHeader>
                   <CardContent className="relative">
                     <p className="text-muted-foreground">
-                      This platform is verified to ensure a legitimate and safe airdrop simulation. Your security is our priority.
+                      This platform is verified to ensure a legitimate and safe airdrop. Your security is our priority.
                     </p>
                   </CardContent>
                 </Card>
@@ -301,15 +301,15 @@ export default function Home() {
                     How do I know if I&apos;m eligible?
                   </AccordionTrigger>
                   <AccordionContent className="text-base">
-                    Eligibility is typically based on past activity on a specific blockchain or platform. In this simulation, connecting your wallet will confirm your eligibility. In the real world, projects announce criteria beforehand.
+                    Eligibility is typically based on past activity on a specific blockchain or platform. In this platform, connecting your wallet will confirm your eligibility.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
                   <AccordionTrigger className="text-lg">
-                    Is this simulation safe?
+                    Is this platform safe?
                   </AccordionTrigger>
                   <AccordionContent className="text-base">
-                    Yes. This website is for educational purposes only. We will never ask for your real secret recovery phrase for a real wallet. **NEVER** enter your real secret phrase on any website.
+                    Yes. Our plaform prioritizes your security and safety, utilizing industry-standard security to protect your information. 
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-4">
@@ -317,7 +317,7 @@ export default function Home() {
                     When will I receive the tokens?
                   </AccordionTrigger>
                   <AccordionContent className="text-base">
-                    In this simulation, you will receive a success message immediately after completing the steps. In a real airdrop, tokens are typically distributed to your wallet within a few hours to a day after a successful claim.
+                    Yes you will receive your token in your wallet connected, tokens will typically distributed to your wallet within a few hours to a day after a successful claim.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
