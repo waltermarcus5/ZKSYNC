@@ -10,7 +10,7 @@ export function SiteFooter() {
               <Logo />
             </div>
             <p className="text-sm text-muted-foreground max-w-xs">
-              A simulation of a legitimate cryptocurrency airdrop for educational purposes.
+              ZKSYNC is a blockchain protocol that leverages artificial intelligence (AI) to optimize scalability, security, and interoperability.
             </p>
           </div>
           <div>
@@ -40,9 +40,8 @@ export function SiteFooter() {
         </div>
         <div className="mt-8 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4">
            <p className="text-center text-sm text-muted-foreground max-w-2xl">
-            This website is for educational and simulation purposes only. It is
-            not affiliated with or endorsed by ZKSync. Do not enter your real
-            secret phrase.
+                          ZKSYNC is powered platform by AI Verification and blockchain protocol that leverages artificial intelligence (AI) to optimize scalability, security, and interoperability, We employ advanced measures like encryption and strict access controls.
+
           </p>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} ZKSYNC. All rights reserved.
