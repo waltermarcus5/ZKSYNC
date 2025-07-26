@@ -59,7 +59,7 @@ export default function Home() {
                 Educational Purpose
               </Button>
               <Button
-                className="font-bold bg-accent text-accent-foreground hover:bg-accent/90"
+                className="font-bold bg-primary text-primary-foreground hover:bg-primary/90"
                 onClick={() => setIsModalOpen(true)}
               >
                 Claim Now
@@ -70,7 +70,7 @@ export default function Home() {
 
         <main className="flex-1">
           <section className="relative w-full pt-24 pb-20 md:pt-36 md:pb-28 flex items-center justify-center text-center overflow-hidden">
-            <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 animate-[animated-gradient_10s_ease_infinite]">
+             <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 animate-[animated-gradient_10s_ease_infinite]">
             </div>
             
             <div className="container px-4 md:px-6 z-10">
@@ -78,7 +78,7 @@ export default function Home() {
                 <div className="inline-block rounded-lg bg-primary/10 px-4 py-2 text-sm font-bold text-primary">
                   ZKSYNC (ZK) AIRDROP
                 </div>
-                <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
+                <h1 className="font-headline text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl text-white">
                   Claim Your ZK Tokens
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
@@ -89,7 +89,7 @@ export default function Home() {
                 <div className="flex justify-center">
                   <Button
                     size="lg"
-                    className="font-bold text-lg bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20"
+                    className="font-bold text-lg bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                     onClick={() => setIsModalOpen(true)}
                   >
                     Claim Airdrop
@@ -153,7 +153,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="why-claim" className="py-20 sm:py-28 bg-secondary/50">
+          <section id="why-claim" className="py-20 sm:py-28 bg-card/50">
             <div className="container mx-auto px-4">
               <div className="text-center mb-16">
                 <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
