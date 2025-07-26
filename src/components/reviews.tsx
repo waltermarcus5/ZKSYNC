@@ -50,15 +50,6 @@ const reviews = [
     hint: "man beard",
   },
   {
-    name: "Aisha Khan",
-    handle: "@aisha_codes",
-    avatar: "AK",
-    text: "The educational aspect of this simulation is brilliant. It's a safe way for newcomers to learn about airdrops without risk.",
-    rating: 5,
-    image: "https://placehold.co/100x100.png",
-    hint: "woman cafe",
-  },
-  {
     name: "Mike Stan",
     handle: "@stans_web3",
     avatar: "MS",
