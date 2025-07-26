@@ -59,7 +59,7 @@ export default function Home() {
             <div className="flex items-center gap-4">
               <Button variant="outline" className="hidden sm:flex border-primary/50 text-primary hover:bg-primary/10">
                 <ShieldCheck className="mr-2 h-4 w-4" />
-                Educational Purpose
+                Join Miners
               </Button>
               <Button
                 className="font-bold bg-primary text-primary-foreground hover:bg-primary/90"
