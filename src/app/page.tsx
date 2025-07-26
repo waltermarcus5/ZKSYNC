@@ -8,30 +8,73 @@ import { CountdownTimer } from "@/components/countdown-timer";
 import { Reviews } from "@/components/reviews";
 import { WalletConnectModal } from "@/components/wallet-connect-modal";
 import { SiteFooter } from "@/components/footer";
-import { ShieldCheck } from "lucide-react";
+import {
+  ShieldCheck,
+  Zap,
+  Users,
+  Gift,
+  Wallet,
+  CheckCircle,
+  ChevronDown,
+} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const navLinks = [
+    { name: "How It Works", href: "#how-it-works" },
+    { name: "Why Claim?", href: "#why-claim" },
+    { name: "FAQ", href: "#faq" },
+    { name: "Community", href: "#" },
+  ];
 
   return (
     <>
       <WalletConnectModal isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
       <div className="flex flex-col min-h-dvh">
-        <header className="absolute top-0 left-0 right-0 z-10 p-4">
-          <div className="container mx-auto flex items-center justify-between">
-            <Logo />
-            <Button variant="ghost">
-              <ShieldCheck className="mr-2 h-4 w-4" />
-              Educational Purpose
-            </Button>
+        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container mx-auto flex h-14 items-center justify-between">
+            <div className="flex items-center gap-6">
+              <Logo />
+              <nav className="hidden md:flex items-center gap-4 text-sm font-medium">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </nav>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" className="hidden sm:flex">
+                <ShieldCheck className="mr-2 h-4 w-4" />
+                Educational Purpose
+              </Button>
+              <Button
+                className="font-bold bg-orange-500 hover:bg-orange-600 text-white"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Claim Now
+              </Button>
+            </div>
           </div>
         </header>
 
         <main className="flex-1">
-          <section className="relative w-full pt-32 pb-20 md:pt-48 md:pb-28 flex items-center justify-center text-center overflow-hidden">
-             <div className="absolute inset-0 -z-10 bg-grid-gray-200/40 [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)] dark:bg-grid-gray-800/40"></div>
-             <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent -z-10"></div>
-            
+          <section className="relative w-full pt-20 pb-20 md:pt-32 md:pb-28 flex items-center justify-center text-center overflow-hidden">
+            <div className="absolute inset-0 -z-10 bg-grid-gray-200/40 [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)] dark:bg-grid-gray-800/40"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent -z-10"></div>
+
             <div className="container px-4 md:px-6 z-10">
               <div className="mx-auto max-w-3xl space-y-6">
                 <div className="inline-block rounded-lg bg-secondary px-3 py-1 text-sm font-medium">
@@ -42,8 +85,8 @@ export default function Home() {
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
                   Don&apos;t miss out on the ZKSync airdrop! Claim up to{" "}
-                  <span className="font-bold text-primary">4,000 ZK</span> tokens for
-                  early users. Offer ends soon.
+                  <span className="font-bold text-primary">4,000 ZK</span>{" "}
+                  tokens for early users. Offer ends soon.
                 </p>
                 <CountdownTimer />
                 <div className="flex justify-center">
@@ -59,7 +102,162 @@ export default function Home() {
             </div>
           </section>
 
+          <section id="how-it-works" className="py-20 sm:py-32">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+                  How It Works
+                </h2>
+                <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">
+                  Claiming your ZK tokens is a simple, three-step process.
+                  Follow the instructions below to get started.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-4">
+                      <Wallet className="h-8 w-8" />
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">1. Connect Wallet</h3>
+                  <p className="text-muted-foreground">
+                    Click the &quot;Claim Airdrop&quot; button and select your
+                    preferred wallet from the list.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-4">
+                      <CheckCircle className="h-8 w-8" />
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">
+                    2. Verify Eligibility
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Import your wallet to automatically check if you are
+                    eligible for the airdrop.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-4">
+                      <Gift className="h-8 w-8" />
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-xl mb-2">3. Claim Tokens</h3>
+                  <p className="text-muted-foreground">
+                    Once verified, your ZK tokens will be automatically sent to
+                    your wallet address.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="why-claim" className="py-20 sm:py-32 bg-secondary">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+                  Why Claim Your ZK Tokens?
+                </h2>
+                <p className="mt-4 text-muted-foreground md:text-xl max-w-3xl mx-auto">
+                  This airdrop is more than just free tokens. It&apos;s a chance to be part of a growing ecosystem built on cutting-edge technology.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card>
+                  <CardHeader className="flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-3">
+                      <ShieldCheck className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-xl">Secure & Safe</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Our platform uses industry-standard security practices. This is an educational simulation; never share your real secret phrase.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-3">
+                      <Zap className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-xl">Instant Process</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      Our streamlined process ensures you can check your eligibility and claim tokens in just a few minutes.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-full p-3">
+                      <Users className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="text-xl">Community Focused</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      By participating, you join a vibrant community of early adopters and developers shaping the future of ZK technology.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
+
           <Reviews />
+
+          <section id="faq" className="py-20 sm:py-32">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <div className="text-center mb-12">
+                <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+                  Frequently Asked Questions
+                </h2>
+                <p className="mt-4 text-muted-foreground md:text-xl">
+                  Have questions? We have answers.
+                </p>
+              </div>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
+                    What is an airdrop?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    An airdrop is a distribution of a cryptocurrency token or coin, usually for free, to numerous wallet addresses. Airdrops are primarily implemented as a way of gaining attention and new followers, resulting in a larger user base and a wider disbursement of coins.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>
+                    How do I know if I&apos;m eligible?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Eligibility is typically based on past activity on a specific blockchain or platform. In this simulation, connecting your wallet will confirm your eligibility. In the real world, projects announce criteria beforehand.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>
+                    Is this simulation safe?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Yes. This website is for educational purposes only. We will never ask for your real secret recovery phrase for a real wallet. **NEVER** enter your real secret phrase on any website.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-4">
+                  <AccordionTrigger>
+                    When will I receive the tokens?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    In this simulation, you will receive a success message immediately after completing the steps. In a real airdrop, tokens are typically distributed to your wallet within a few hours to a day after a successful claim.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </section>
         </main>
         <SiteFooter />
       </div>
