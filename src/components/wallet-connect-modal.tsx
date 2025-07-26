@@ -95,12 +95,6 @@ const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => 
             });
         }
     }
-
-    return () => {
-        // This cleanup is important when the component unmounts, but we also prevent re-render.
-        // It's often difficult to truly clean up the script-injected reCAPTCHA.
-        // The check for widgetIdRef.current === null is the main guard against re-rendering.
-    };
   }, [onChange]);
 
   return <div ref={recaptchaRef} />;
@@ -285,22 +279,22 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
   
   const handleClose = (open) => {
     if (!open) {
-      const timer = setTimeout(() => {
+      // Reset state when modal is explicitly closed
+      setTimeout(() => {
         setView("wallets");
         setSelectedWallet(null);
       }, 300); // Wait for close animation
-      return () => clearTimeout(timer);
     }
     onOpenChange(open);
   }
 
   React.useEffect(() => {
+    // Also reset state if isOpen prop changes to false from the parent
     if (!isOpen) {
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         setView("wallets");
         setSelectedWallet(null);
       }, 300); // Wait for close animation
-      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
@@ -350,5 +344,3 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
     </Dialog>
   );
 }
-
-    
