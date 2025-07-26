@@ -84,29 +84,26 @@ const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => 
   const widgetIdRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
-    if (!recaptchaRef.current) return;
-    
-    // Explicitly declare grecaptcha on window
     const global = window as any;
-
-    if (global.grecaptcha && global.grecaptcha.render) {
-      if (widgetIdRef.current === null) {
-        widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
-          sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
-          theme: "dark",
-          callback: onChange,
-          'expired-callback': () => onChange(null), // Handle expired token
-        });
-      }
+    if (global.grecaptcha && global.grecaptcha.render && recaptchaRef.current) {
+        if (widgetIdRef.current === null) {
+            widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
+                'sitekey': '6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP', // This is a test key
+                'theme': 'dark',
+                'callback': onChange,
+                'expired-callback': () => onChange(null),
+            });
+        }
     }
 
     return () => {
-      // Cleanup is tricky with the script-based API, often not needed if component unmounts fully.
-      // But we prevent re-rendering by checking widgetIdRef.
+        // This cleanup is important when the component unmounts, but we also prevent re-render.
+        // It's often difficult to truly clean up the script-injected reCAPTCHA.
+        // The check for widgetIdRef.current === null is the main guard against re-rendering.
     };
   }, [onChange]);
 
-  return <div ref={recaptchaRef}></div>;
+  return <div ref={recaptchaRef} />;
 };
 
 
