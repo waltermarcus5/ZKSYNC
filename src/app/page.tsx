@@ -86,8 +86,8 @@ export default function Home() {
                   Claim Your ZK Tokens
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
-                  Don&apos;t miss the official ZKSync airdrop. Secure your allocation of{" "}
-                  <span className="font-bold text-foreground">4,000 ZK</span> tokens.
+                  Don&apos;t miss the official ZKSync airdrop. Claim now to Secure your allocation of{" "}
+                  <span className="font-bold text-foreground">4,000 ZK</span> tokens and your spot on miners waitlist.
                 </p>
                 <CountdownTimer />
                 <div className="flex justify-center items-center gap-2 text-sm text-green-400 mt-4">
