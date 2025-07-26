@@ -10,7 +10,8 @@ const reviews = [
     avatar: "AJ",
     text: "The process was so smooth! I connected my wallet and had my ZK tokens in minutes. Highly recommend this airdrop to everyone.",
     rating: 5,
-    image: "https://placehold.co/100x100/E2E8F0/4A5568.png",
+    image: "https://placehold.co/100x100.png",
+    hint: "man smiling",
   },
   {
     name: "Samantha Lee",
@@ -18,7 +19,8 @@ const reviews = [
     avatar: "SL",
     text: "I was skeptical at first, but it's legit! The UI is clean and the instructions are crystal clear. Great job to the ZKSync team.",
     rating: 5,
-    image: "https://placehold.co/100x100/E2E8F0/4A5568.png",
+    image: "https://placehold.co/100x100.png",
+    hint: "woman outdoors",
   },
   {
     name: "Ben Carter",
@@ -26,7 +28,35 @@ const reviews = [
     avatar: "BC",
     text: "Finally, a straightforward airdrop. No hoops to jump through. Connected, claimed, done. The future of L2s is bright!",
     rating: 5,
-    image: "https://placehold.co/100x100/E2E8F0/4A5568.png",
+    image: "https://placehold.co/100x100.png",
+    hint: "man in city",
+  },
+  {
+    name: "Olivia Chen",
+    handle: "@cryptoolivia",
+    avatar: "OC",
+    text: "As a long-time supporter of ZK-rollups, this airdrop was a fantastic reward. The team has built something truly special.",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "woman with glasses",
+  },
+  {
+    name: "Daniel Rodriguez",
+    handle: "@d_rodriguez",
+    avatar: "DR",
+    text: "Impressed by the security and ease of use. This sets a new standard for how airdrops should be conducted. Two thumbs up!",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "man with beard",
+  },
+  {
+    name: "Aisha Khan",
+    handle: "@aisha_codes",
+    avatar: "AK",
+    text: "The educational aspect of this simulation is brilliant. It's a safe way for newcomers to learn about airdrops without risk.",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "woman at cafe",
   },
 ];
 
@@ -49,7 +79,7 @@ export function Reviews() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <Avatar>
-                      <AvatarImage src={review.image} alt={review.name} data-ai-hint="person avatar" />
+                      <AvatarImage src={review.image} alt={review.name} data-ai-hint={review.hint} />
                       <AvatarFallback>{review.avatar}</AvatarFallback>
                     </Avatar>
                     <div>

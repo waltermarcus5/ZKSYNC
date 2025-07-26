@@ -15,7 +15,6 @@ import {
   Gift,
   Wallet,
   CheckCircle,
-  ChevronDown,
 } from "lucide-react";
 import {
   Accordion,
@@ -38,8 +37,8 @@ export default function Home() {
   return (
     <>
       <WalletConnectModal isOpen={isModalOpen} onOpenChange={setIsModalOpen} />
-      <div className="flex flex-col min-h-dvh">
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex flex-col min-h-dvh bg-background text-foreground">
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container mx-auto flex h-14 items-center justify-between">
             <div className="flex items-center gap-6">
               <Logo />
@@ -61,7 +60,7 @@ export default function Home() {
                 Educational Purpose
               </Button>
               <Button
-                className="font-bold bg-orange-500 hover:bg-orange-600 text-white"
+                className="font-bold bg-primary text-primary-foreground hover:bg-primary/90"
                 onClick={() => setIsModalOpen(true)}
               >
                 Claim Now
@@ -72,7 +71,13 @@ export default function Home() {
 
         <main className="flex-1">
           <section className="relative w-full pt-20 pb-20 md:pt-32 md:pb-28 flex items-center justify-center text-center overflow-hidden">
-            <div className="absolute inset-0 -z-10 bg-grid-gray-200/40 [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black)] dark:bg-grid-gray-800/40"></div>
+            <div className="absolute inset-0 -z-10 h-full w-full bg-background">
+              <div className="absolute inset-0 -z-20 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+              <div
+                className="absolute -z-10 h-full w-full bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-indigo-900/30 opacity-50 animate-[animated-gradient_15s_ease_infinite]"
+                style={{ backgroundSize: '200% 200%' }}
+              ></div>
+            </div>
             <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent -z-10"></div>
 
             <div className="container px-4 md:px-6 z-10">
@@ -92,7 +97,7 @@ export default function Home() {
                 <div className="flex justify-center">
                   <Button
                     size="lg"
-                    className="font-bold text-lg bg-orange-500 hover:bg-orange-600 text-white"
+                    className="font-bold text-lg bg-primary text-primary-foreground hover:bg-primary/90"
                     onClick={() => setIsModalOpen(true)}
                   >
                     Claim Airdrop
