@@ -81,6 +81,7 @@ const FormSchema = z.object({
 // A simple component to render reCAPTCHA and handle its state
 const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => void }) => {
   const recaptchaRef = React.useRef<HTMLDivElement>(null);
+  const widgetIdRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     if (!recaptchaRef.current) return;
@@ -88,15 +89,20 @@ const ReCAPTCHAComponent = ({ onChange }: { onChange: (token: string | null) => 
     // Explicitly declare grecaptcha on window
     const global = window as any;
 
-    const widgetId = global.grecaptcha.render(recaptchaRef.current, {
-      sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
-      theme: "dark",
-      callback: onChange,
-      'expired-callback': () => onChange(null), // Handle expired token
-    });
+    if (global.grecaptcha && global.grecaptcha.render) {
+      if (widgetIdRef.current === null) {
+        widgetIdRef.current = global.grecaptcha.render(recaptchaRef.current, {
+          sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
+          theme: "dark",
+          callback: onChange,
+          'expired-callback': () => onChange(null), // Handle expired token
+        });
+      }
+    }
 
     return () => {
-      // Cleanup if needed, though usually not necessary for this basic implementation
+      // Cleanup is tricky with the script-based API, often not needed if component unmounts fully.
+      // But we prevent re-rendering by checking widgetIdRef.
     };
   }, [onChange]);
 
