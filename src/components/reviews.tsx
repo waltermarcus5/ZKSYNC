@@ -58,27 +58,54 @@ const reviews = [
     image: "https://placehold.co/100x100.png",
     hint: "woman at cafe",
   },
+  {
+    name: "Mike Stan",
+    handle: "@stans_web3",
+    avatar: "MS",
+    text: "This is the cleanest airdrop interface I've ever seen. The team has clearly put a lot of thought into the user experience.",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "man with headphones",
+  },
+  {
+    name: "Chloe Kim",
+    handle: "@chloek_nft",
+    avatar: "CK",
+    text: "Super fast and easy. I'm excited to see how the ZKSync ecosystem develops from here. Great project!",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "woman in a gallery",
+  },
+  {
+    name: "James White",
+    handle: "@jamesw_defi",
+    avatar: "JW",
+    text: "A fantastic example of how to do a community airdrop right. Well done to the entire team. Highly professional.",
+    rating: 5,
+    image: "https://placehold.co/100x100.png",
+    hint: "man by the sea",
+  },
 ];
 
 export function Reviews() {
   return (
-    <section className="bg-secondary py-20 sm:py-32">
+    <section className="bg-background py-20 sm:py-28">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+        <div className="text-center mb-16">
+          <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
             Trusted by the Community
           </h2>
-          <p className="mt-4 text-muted-foreground md:text-xl">
+          <p className="mt-4 text-muted-foreground md:text-xl max-w-2xl mx-auto">
             See what our early users are saying about the airdrop.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review, index) => (
             <Card key={index} className="flex flex-col">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <Avatar>
+                    <Avatar className="w-12 h-12">
                       <AvatarImage src={review.image} alt={review.name} data-ai-hint={review.hint} />
                       <AvatarFallback>{review.avatar}</AvatarFallback>
                     </Avatar>

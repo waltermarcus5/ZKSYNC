@@ -208,7 +208,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess, formKey }) {
             </p>
           <Button
             type="submit"
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting

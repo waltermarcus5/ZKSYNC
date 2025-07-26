@@ -2,15 +2,14 @@ import { Logo } from "@/components/logo";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-secondary">
+    <footer className="border-t bg-secondary/30">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Logo />
-              <p className="text-lg font-bold">AirdropSim</p>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-w-xs">
               A simulation of a legitimate cryptocurrency airdrop for educational purposes.
             </p>
           </div>

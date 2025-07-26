@@ -1,62 +1,42 @@
 export function Logo() {
   return (
-    <div className="flex items-center justify-center size-9 bg-primary rounded-lg text-primary-foreground shadow-lg">
+    <div className="flex items-center gap-2" title="AirdropSim by ZKSync">
       <svg
-        className="size-6"
+        className="h-8 w-8 text-primary"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M8.5 7.5L12 4L15.5 7.5"
+          d="M16.625 2.5H7.375L2.5 12L7.375 21.5H16.625L21.5 12L16.625 2.5Z"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M8.5 16.5L12 20L15.5 16.5"
+          d="M7.375 2.5L12 12L7.375 21.5"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M4 12H20"
+          d="M16.625 2.5L12 12L16.625 21.5"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M17.5 12L19.5 10"
+          d="M2.5 12H21.5"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M17.5 12L19.5 14"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M6.5 12L4.5 10"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M6.5 12L4.5 14"
-          stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
       </svg>
+      <span className="text-xl font-bold font-headline">AirdropSim</span>
     </div>
   );
 }

@@ -59,16 +59,16 @@ export function CountdownTimer() {
   }, [endDate]);
 
   return (
-    <div className="flex justify-center space-x-2 md:space-x-4 my-6">
+    <div className="flex justify-center space-x-2 md:space-x-4 my-8">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div
           key={unit}
-          className="flex flex-col items-center justify-center bg-card/80 backdrop-blur-sm border rounded-lg w-20 h-20 md:w-24 md:h-24"
+          className="flex flex-col items-center justify-center bg-card/80 backdrop-blur-sm border rounded-lg w-24 h-24 md:w-28 md:h-28"
         >
-          <span className="text-3xl md:text-4xl font-bold font-headline text-primary tracking-tighter">
+          <span className="text-4xl md:text-5xl font-bold font-headline text-primary tracking-tighter">
             {String(value).padStart(2, "0")}
           </span>
-          <span className="text-xs uppercase text-muted-foreground tracking-widest">
+          <span className="text-xs uppercase text-muted-foreground tracking-widest pt-1">
             {unit}
           </span>
         </div>
