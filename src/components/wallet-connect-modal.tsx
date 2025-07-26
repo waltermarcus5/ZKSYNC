@@ -168,9 +168,12 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
         variant: "destructive",
       });
     } finally {
-      // In a real app, you would reset grecaptcha here, but since the modal closes,
-      // it will be re-rendered on next open.
-      form.reset();
+        form.reset();
+        const global = window as any;
+        if (global.grecaptcha) {
+            // It's often better to let the widget get re-created on modal open
+            // than to try and reset a widget that might not exist in the DOM anymore.
+        }
     }
   };
 
@@ -347,3 +350,5 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
     </Dialog>
   );
 }
+
+    
