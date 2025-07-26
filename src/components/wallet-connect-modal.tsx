@@ -86,31 +86,251 @@ const wallets = [
       </svg>
     )
   },
-    { name: "Ledger", logo: "https://placehold.co/64x64.png", hint: "sleek usb" },
-    { name: "Trezor", logo: "https://placehold.co/64x64.png", hint: "black device" },
-    { name: "Exodus", logo: "https://placehold.co/64x64.png", hint: "X logo" },
-    { name: "MyEtherWallet", logo: "https://placehold.co/64x64.png", hint: "green wallet" },
-    { name: "Solflare", logo: "https://placehold.co/64x64.png", hint: "sun logo" },
-    { name: "Rainbow", logo: "https://placehold.co/64x64.png", hint: "rainbow logo" },
-    { name: "Argent", logo: "https://placehold.co/64x64.png", hint: "A logo" },
-    { name: "Zerion", logo: "https://placehold.co/64x64.png", hint: "Z logo" },
-    { name: "imToken", logo: "https://placehold.co/64x64.png", hint: "blue circle" },
-    { name: "MathWallet", logo: "https://placehold.co/64x64.png", hint: "M logo" },
-    { name: "SafePal", logo: "https://placehold.co/64x64.png", hint: "S shield" },
-    { name: "Atomic Wallet", logo: "https://placehold.co/64x64.png", hint: "atom logo" },
-    { name: "Guarda Wallet", logo: "https://placehold.co/64x64.png", hint: "G shield" },
-    { name: "Coinomi", logo: "https://placehold.co/64x64.png", hint: "C logo" },
-    { name: "Zengo", logo: "https://placehold.co/64x64.png", hint: "Z shield" },
-    { name: "Crypto.com DeFi Wallet", logo: "https://placehold.co/64x64.png", hint: "lion logo" },
-    { name: "Unstoppable Wallet", logo: "https://placehold.co/64x64.png", hint: "U logo" },
-    { name: "BitPay", logo: "https://placehold.co/64x64.png", hint: "blue B" },
-    { name: "BRD", logo: "https://placehold.co/64x64.png", hint: "B logo" },
-    { name: "Frame", logo: "https://placehold.co/64x64.png", hint: "frame icon" },
-    { name: "Rabby Wallet", logo: "https://placehold.co/64x64.png", hint: "rabbit logo" },
-    { name: "Core", logo: "https://placehold.co/64x64.png", hint: "C logo" },
-    { name: "Enkrypt", logo: "https://placehold.co/64x64.png", hint: "E shield" },
-    { name: "XDEFI Wallet", logo: "https://placehold.co/64x64.png", hint: "X logo" },
-    { name: "Keplr", logo: "https://placehold.co/64x64.png", hint: "K logo" },
+  {
+    name: "Ledger",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="8" width="18" height="8" rx="2" fill="#2F2F2F"/>
+        <rect x="5" y="10" width="8" height="4" rx="1" fill="#757575"/>
+      </svg>
+    )
+  },
+  {
+    name: "Trezor",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 7C4 5.34315 5.34315 4 7 4H17C18.6569 4 20 5.34315 20 7V17C20 18.6569 18.6569 20 17 20H7C5.34315 20 4 18.6569 4 17V7Z" fill="#1A1A1A"/>
+        <circle cx="12" cy="12" r="3" fill="#BDBDBD"/>
+      </svg>
+    )
+  },
+  {
+    name: "Exodus",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="#8A4DFF" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M2 7L12 12L22 7" stroke="#8A4DFF" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M12 22V12" stroke="#8A4DFF" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M17 4.5L7 9.5" stroke="#8A4DFF" strokeWidth="2" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "MyEtherWallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#00C78A"/>
+        <path d="M12 6L7 12L12 18L17 12L12 6Z" fill="white"/>
+      </svg>
+    )
+  },
+  {
+    name: "Solflare",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="6" fill="#F7D03A"/>
+        <path d="M12 2V4" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M12 20V22" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 12L20 12" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M4 12L2 12" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M18.36 5.64L16.95 7.05" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M7.05 16.95L5.64 18.36" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M18.36 18.36L16.95 16.95" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M7.05 7.05L5.64 5.64" stroke="#F7D03A" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Rainbow",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12" stroke="#FF5733" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M5 12C5 8.13401 8.13401 5 12 5C15.866 5 19 8.13401 19 12" stroke="#FFC300" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12" stroke="#DAF7A6" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12" stroke="#900C3F" strokeWidth="3" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Argent",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 22H22L12 2Z" fill="#FF5733"/>
+        <path d="M12 11L15 18H9L12 11Z" fill="white"/>
+      </svg>
+    )
+  },
+  {
+    name: "Zerion",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4H20L12 12L20 20H4L12 12L4 4Z" stroke="#2196F3" strokeWidth="2" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "imToken",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#0989FD"/>
+        <path d="M12 5L15 12L12 19L9 12L12 5Z" stroke="white" strokeWidth="2" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "MathWallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 20V4L12 12L20 4V20" stroke="#00C4FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "SafePal",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="#1994F3"/>
+        <path d="M16 10C16 12.2091 14.2091 14 12 14C9.79086 14 8 12.2091 8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10Z" fill="white"/>
+        <path d="M12 14V18" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Atomic Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="2" stroke="#2A65F7" strokeWidth="2"/>
+        <path d="M12 2C6.47715 2 2 6.47715 2 12" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 12C22 17.5228 17.5228 22 12 22" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M12 22C6.47715 22 2 17.5228 2 12" transform="rotate(120 12 12)" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 12C22 6.47715 17.5228 2 12 2" transform="rotate(120 12 12)" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M12 22C6.47715 22 2 17.5228 2 12" transform="rotate(-120 12 12)" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M22 12C22 6.47715 17.5228 2 12 2" transform="rotate(-120 12 12)" stroke="#2A65F7" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Guarda Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 6V13.55C4 17.5 7.34 21.23 12 22C16.66 21.23 20 17.5 20 13.55V6L12 2Z" fill="#2AA89A"/>
+        <path d="M15 10H9V12C9 13.65 10.35 15 12 15C13.65 15 15 13.65 15 12V10Z" fill="white"/>
+      </svg>
+    )
+  },
+  {
+    name: "Coinomi",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4" stroke="#4B9FE3" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M12 12L16 8" stroke="#4B9FE3" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Zengo",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#363636"/>
+        <path d="M8 8L16 16" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M16 8H8V16" stroke="white" strokeWidth="2" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Crypto.com DeFi Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="#1199FA"/>
+        <path d="M17.5 7.5L12 10.5L6.5 7.5L12 4.5L17.5 7.5Z" fill="white"/>
+        <path d="M6.5 9V15L12 18L17.5 15V9L12 12L6.5 9Z" fill="white" fillOpacity="0.7"/>
+      </svg>
+    )
+  },
+  {
+    name: "Unstoppable Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#FFC700"/>
+        <path d="M8 15V9H16V15" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "BitPay",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#1E409C"/>
+        <path d="M10 7H14C15.1046 7 16 7.89543 16 9V10C16 11.1046 15.1046 12 14 12H10V7Z" fill="white"/>
+        <path d="M10 12H15C16.1046 12 17 12.8954 17 14V15C17 16.1046 16.1046 17 15 17H10V12Z" fill="white"/>
+      </svg>
+    )
+  },
+  {
+    name: "BRD",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="20" height="20" rx="4" fill="#FE5035"/>
+        <path d="M8 7H12.5C14.433 7 16 8.567 16 10.5V13.5C16 15.433 14.433 17 12.5 17H8V7Z" fill="white"/>
+        <circle cx="12.5" cy="12" r="1.5" fill="#FE5035"/>
+      </svg>
+    )
+  },
+  {
+    name: "Frame",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 3H21V21H3V3Z" stroke="#04DD8D" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M8 8H16V16H8V8Z" stroke="#04DD8D" strokeWidth="2" strokeLinejoin="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Rabby Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" fill="#865DFF"/>
+        <path d="M12 2C12 2 14 4 15 5" stroke="#865DFF" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M12 2C12 2 10 4 9 5" stroke="#865DFF" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Core",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="8" stroke="#10A5E3" strokeWidth="3"/>
+        <circle cx="12" cy="12" r="3" fill="#10A5E3"/>
+      </svg>
+    )
+  },
+  {
+    name: "Enkrypt",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L4 6V13C4 17.14 7.58 20.84 12 22C16.42 20.84 20 17.14 20 13V6L12 2Z" fill="#0AAB5E"/>
+        <path d="M16 10H8V14H16V10Z" fill="white"/>
+        <path d="M8 12H16" stroke="#0AAB5E" strokeWidth="2"/>
+      </svg>
+    )
+  },
+  {
+    name: "XDEFI Wallet",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4L20 20M20 4L4 20" stroke="#19D894" strokeWidth="3" strokeLinecap="round"/>
+      </svg>
+    )
+  },
+  {
+    name: "Keplr",
+    svg: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4L12 12L4 20V4Z" fill="#1C1C1C"/>
+        <path d="M20 4L12 12L20 20V4Z" fill="#1C1C1C"/>
+      </svg>
+    )
+  },
 ];
 
 
