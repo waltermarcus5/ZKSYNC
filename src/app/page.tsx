@@ -70,7 +70,8 @@ export default function Home() {
 
         <main className="flex-1">
           <section className="relative w-full pt-24 pb-20 md:pt-36 md:pb-28 flex items-center justify-center text-center overflow-hidden">
-             <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 animate-[animated-gradient_10s_ease_infinite]">
+             <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+              <div className="absolute left-0 top-0 -z-10 h-2/3 w-full bg-gradient-to-b from-primary/10 to-transparent"></div>
             </div>
             
             <div className="container px-4 md:px-6 z-10">
@@ -261,3 +262,5 @@ export default function Home() {
     </>
   );
 }
+
+    

