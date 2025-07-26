@@ -14,6 +14,9 @@ import {
   Gift,
   Wallet,
   CheckCircle,
+  Cpu,
+  Fingerprint,
+  Verified,
 } from "lucide-react";
 import {
   Accordion,
@@ -208,6 +211,65 @@ export default function Home() {
             </div>
           </section>
 
+          <section id="ai-verification" className="py-20 sm:py-28">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-16">
+                <h2 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl">
+                  AI-Powered Verification
+                </h2>
+                <p className="mt-4 text-muted-foreground md:text-xl max-w-3xl mx-auto">
+                  We leverage cutting-edge AI to ensure a fair, secure, and seamless airdrop experience for all participants.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <Card className="relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tl from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardHeader className="relative flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-xl p-3 border border-primary/20">
+                      <Cpu className="h-7 w-7" />
+                    </div>
+                    <CardTitle className="text-xl">AI Eligibility Check</CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative">
+                    <p className="text-muted-foreground">
+                      Our AI model instantly analyzes on-chain data to verify your eligibility, saving you time and effort.
+                    </p>
+                  </CardContent>
+                </Card>
+                 <Card className="relative overflow-hidden group border-primary/50 shadow-lg shadow-primary/10">
+                   <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent"></div>
+                   <CardHeader className="relative flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-xl p-3 border border-primary/20">
+                      <Verified className="h-7 w-7" />
+                    </div>
+                    <CardTitle className="text-xl">Verified & Authentic</CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative">
+                    <p className="text-muted-foreground">
+                      This platform is verified to ensure a legitimate and safe airdrop simulation. Your security is our priority.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card className="relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tl from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardHeader className="relative flex flex-row items-center gap-4">
+                    <div className="bg-primary/10 text-primary rounded-xl p-3 border border-primary/20">
+                      <Fingerprint className="h-7 w-7" />
+                    </div>
+                    <CardTitle className="text-xl">Bot & Fraud Detection</CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative">
+                    <p className="text-muted-foreground">
+                      Advanced algorithms monitor for malicious activity, ensuring a fair distribution for all genuine users.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
+
           <Reviews />
 
           <section id="faq" className="py-20 sm:py-28">
@@ -262,5 +324,3 @@ export default function Home() {
     </>
   );
 }
-
-    
